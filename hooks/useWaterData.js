@@ -108,6 +108,8 @@ export function useWaterData() {
       }
 
       renderStations(songkhla, true);
+      console.log('songkhla', songkhla);
+      
       const now = new Date();
       setUpdatedText(`อัปเดตล่าสุด ${now.toLocaleString('th-TH', { dateStyle: 'medium', timeStyle: 'medium' })}`);
     } catch (e) {

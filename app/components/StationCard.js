@@ -103,8 +103,8 @@ export default function StationCard({ item }) {
           </div>
         </div>
         <div className="text-xs text-[#9FB4B0] mt-0.5 mb-3">
-          {amphoe && `${amphoe} · `}
           {tumbon && `${tumbon} · `}
+          {amphoe && `${amphoe} · `}
           <span className="text-[#6FA8A3] font-bold">{river}</span>
         </div>
         <div className="grid grid-cols-2 gap-2 font-mono">

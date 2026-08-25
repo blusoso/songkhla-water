@@ -2,10 +2,12 @@
 
 import { useRef } from "react";
 import { useWaterData } from "@/hooks/useWaterData";
+import { useRain24hData } from "@/hooks/useRain24hData";
 import StationCard from "./components/StationCard";
 import SummaryCards from "./components/SummaryCards";
 import StatusPanel from "./components/StatusPanel";
 import StationMap from "./components/StationMap";
+import RainSummary from "./components/RainSummary";
 
 export default function HomePage() {
   const {
@@ -18,6 +20,13 @@ export default function HomePage() {
     attemptLiveFetch,
     manualImport,
   } = useWaterData();
+
+  const {
+    rainStations,
+    loading: rainLoading,
+    error: rainError,
+    refresh: refreshRain,
+  } = useRain24hData();
 
   const manualTextareaRef = useRef(null);
   const manualStatusRef = useRef(null);
@@ -120,6 +129,16 @@ export default function HomePage() {
             </div>
           </>
         ) : null}
+
+        {!loading && !rainLoading && rainStations.length > 0 && (
+          <RainSummary rainStations={rainStations} />
+        )}
+
+        {rainError && (
+          <div className="text-xs text-[#E5533D] mb-4">
+            ⚠️ ไม่สามารถโหลดข้อมูลฝน: {rainError}
+          </div>
+        )}
 
         {/* Manual Import */}
         <details className="mt-7 border border-[rgba(234,242,240,0.12)] rounded-[14px] bg-[#223540] px-4 py-2">
